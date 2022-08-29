@@ -169,6 +169,7 @@ const Posts: FC = () => {
               id={post.id}
               body={post.body}
               title={post.title}
+              userId={post.userId}
               key={post.id}
             />
           ))}
