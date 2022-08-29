@@ -28,6 +28,17 @@ export const createPost = createAsyncThunk<TPost, TCreatePostParams>(
   }
 );
 
+export const updatePost = createAsyncThunk<TPost, TCreatePostParams>(
+  "posts/updatePost",
+  async ({ id, userId, title, body }) => {
+    const { data } = await axios.put(
+      `https://jsonplaceholder.typicode.com/posts/${id}`,
+      { id, userId, title, body }
+    );
+    return data;
+  }
+);
+
 const initialState: IPostsInitialState = {
   items: [],
   status: "",
@@ -51,9 +62,17 @@ export const PostsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(createPost.fulfilled, (state, action) => {
-      state.items.push(action.payload);
-    });
+    builder
+      .addCase(createPost.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+      })
+      .addCase(updatePost.fulfilled, (state, action) => {
+        const item = state.items.find((item) => item.id === action.payload.id);
+        if (item) {
+          item.body = action.payload.body;
+          item.title = action.payload.title;
+        }
+      });
   },
 });
 
