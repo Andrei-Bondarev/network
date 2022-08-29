@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import "./App.css";
+import Header from "./features/header";
+import Posts from "./pages/Posts";
+import Todos from "./pages/Todos";
+import Albums from "./pages/Albums";
+import Grid from "@mui/material/Grid";
+import Photos from "./pages/Photos";
+import PostDetails from "./features/postDetails";
+import { Routes, Route } from "react-router-dom";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      marginTop={"100px"}
+      style={{ minHeight: "100vh" }}
+    >
+      <Grid item xs={3}>
+        <Header />
+        <Routes>
+          <Route path={"/posts"} element={<Posts />} />
+          <Route path={"/albums"} element={<Albums />} />
+          <Route path={"/album/:albumId/photos"} element={<Photos />} />
+          <Route path={"/todos"} element={<Todos />} />
+          <Route path={"/posts/:postId"} element={<PostDetails />} />
+        </Routes>
+      </Grid>
+    </Grid>
   );
 }
 
