@@ -12,7 +12,7 @@ import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
 import { useFormik } from "formik";
 import {
-  createPost,
+  deletePost,
   getItemById,
   updatePost,
 } from "../../pages/Posts/postsSlice";
@@ -85,6 +85,10 @@ const Post: FC<TPostProps> = ({ id, body, title, userId }) => {
   const navigate = useNavigate();
   const onPostClick = () => {
     navigate(`/posts/${id}`);
+  };
+
+  const onDeleteClick = () => {
+    dispatch(deletePost(id));
   };
 
   return (
@@ -205,7 +209,11 @@ const Post: FC<TPostProps> = ({ id, body, title, userId }) => {
                 </form>
               </Box>
             </Modal>
-            <Button variant={"text"} sx={{ p: 2, display: "block" }}>
+            <Button
+              variant={"text"}
+              sx={{ p: 2, display: "block" }}
+              onClick={onDeleteClick}
+            >
               Delete Post
             </Button>
           </Popover>

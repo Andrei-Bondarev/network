@@ -39,6 +39,14 @@ export const updatePost = createAsyncThunk<TPost, TCreatePostParams>(
   }
 );
 
+export const deletePost = createAsyncThunk<number, number>(
+  "posts/deletePost",
+  async (id) => {
+    await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
+    return id;
+  }
+);
+
 const initialState: IPostsInitialState = {
   items: [],
   status: "",
@@ -72,6 +80,9 @@ export const PostsSlice = createSlice({
           item.body = action.payload.body;
           item.title = action.payload.title;
         }
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.items = state.items.filter((post) => post.id !== action.payload);
       });
   },
 });
