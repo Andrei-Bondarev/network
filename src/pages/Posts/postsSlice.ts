@@ -10,14 +10,7 @@ interface IPostsInitialState {
   currentPage: number;
 }
 
-type TCreatePostParams = {
-  id: number;
-  userId: number;
-  title: string;
-  body: string;
-};
-
-export const createPost = createAsyncThunk<TPost, TCreatePostParams>(
+export const createPost = createAsyncThunk<TPost, TPost>(
   "posts/createPost",
   async ({ id, userId, title, body }) => {
     const { data } = await axios.post(
@@ -28,7 +21,7 @@ export const createPost = createAsyncThunk<TPost, TCreatePostParams>(
   }
 );
 
-export const updatePost = createAsyncThunk<TPost, TCreatePostParams>(
+export const updatePost = createAsyncThunk<TPost, TPost>(
   "posts/updatePost",
   async ({ id, userId, title, body }) => {
     const { data } = await axios.put(
