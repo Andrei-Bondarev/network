@@ -13,7 +13,7 @@ import {
 import Pagination from "@mui/material/Pagination";
 
 const Albums: FC = () => {
-  const userId = 1;
+  const userId = Number(localStorage.getItem('userId'));
   const dispatch = useDispatch();
   const isMounted = useRef(false);
   const items = useSelector(getItems);

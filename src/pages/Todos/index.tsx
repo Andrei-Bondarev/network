@@ -29,7 +29,7 @@ const validationSchema = yup.object({
 });
 
 const Todos: FC = () => {
-  const userId = 1;
+  const userId = Number(localStorage.getItem('userId'));
   const todos = useSelector(getItems);
   const isMounted = useRef(false);
   const dispatch = useAppDispatch();

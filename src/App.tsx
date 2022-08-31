@@ -9,6 +9,7 @@ import Photos from "./pages/Photos";
 import PostDetails from "./features/postDetails";
 import { Routes, Route } from "react-router-dom";
 function App() {
+  localStorage.setItem('userId', '1');
   return (
     <Grid
       container

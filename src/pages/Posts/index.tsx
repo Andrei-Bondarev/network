@@ -35,7 +35,7 @@ const validationSchema = yup.object({
 });
 
 const Posts: FC = () => {
-  const userId = 1;
+    const userId = Number(localStorage.getItem('userId'));
 
   const dispatch = useAppDispatch();
 
